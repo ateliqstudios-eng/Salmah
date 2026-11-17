@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>For Salmah 🌸</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,400;1,500&family=Pinyon+Script&family=Quicksand:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg1:#fbeee9; --bg2:#f3d9d6; --paper:#fffaf3; --ink:#5a3f40; --soft:#8d7070;
+  --rose:#d98a98; --rose-d:#c46f80; --gold:#c9a24f; --line:#ecd9cf;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;margin:0}
+body{
+  background:radial-gradient(120% 90% at 50% 0%,var(--bg1),var(--bg2));
+  color:var(--ink);font-family:"Quicksand",system-ui,sans-serif;
+  overflow:hidden;
+  padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px);
+}
+.petal{
+  position:fixed;top:-30px;width:12px;height:16px;border-radius:70% 0 70% 0;
+  background:var(--rose);opacity:.5;pointer-events:none;z-index:1;
+  animation:fall linear infinite;
+}
+@keyframes fall{
+  to{transform:translate3d(var(--dx),110vh,0) rotate(540deg)}
+}
+.screen{
+  position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:20px;z-index:2;transition:opacity .9s ease, transform .9s ease;
+}
+.hide{opacity:0;transform:scale(1.08);pointer-events:none}
+
+/* gate */
+#gate{cursor:pointer;text-align:center}
+#gate h1{font-family:"Pinyon Script",cursive;font-weight:400;font-size:44px;margin:0 0 4px;color:var(--rose-d)}
+#gate p{margin:0;color:var(--soft);font-size:15px;letter-spacing:.04em}
+.bouquet{width:min(260px,66vw);height:auto;margin:10px 0 14px;animation:float 3.6s ease-in-out infinite;transform-origin:50% 90%}
+@keyframes float{50%{transform:translateY(-8px) rotate(2deg)}}
+#gate.open .bouquet{animation:bloom .9s ease forwards}
+@keyframes bloom{to{transform:scale(1.5) translateY(-30px);opacity:0}}
+.tap{margin-top:10px;font-size:13px;color:var(--soft);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.4}}
+
+/* letter */
+#letter{opacity:0;pointer-events:none;transform:translateY(24px)}
+#letter.show{opacity:1;pointer-events:auto;transform:none}
+.paper{
+  position:relative;width:100%;max-width:400px;background:var(--paper);
+  border:1px solid var(--line);border-radius:6px;padding:40px 28px 30px;text-align:left;
+  box-shadow:0 18px 50px rgba(150,90,90,.18);max-height:94vh;overflow:auto;
+}
+.stamp{
+  position:absolute;top:-22px;right:22px;width:54px;height:54px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#e8cc86,var(--gold));
+  box-shadow:0 4px 10px rgba(120,90,30,.3), inset 0 0 0 3px rgba(255,255,255,.35);
+  display:flex;align-items:center;justify-content:center;color:#fffaf0;
+  font-family:"Pinyon Script",cursive;font-size:26px;line-height:1;
+}
+.paper h2{font-family:"Pinyon Script",cursive;font-weight:400;font-size:36px;color:var(--rose-d);margin:0 0 10px}
+.paper p{font-family:"Cormorant Garamond",Georgia,serif;font-size:20px;line-height:1.5;margin:0 0 12px}
+.where{
+  margin:14px 0 16px;padding:10px 14px;border-left:2px solid var(--gold);
+  font-family:"Quicksand",sans-serif;font-size:14px;color:var(--soft);line-height:1.6
+}
+.where b{color:var(--ink);font-weight:600}
+.sign{font-family:"Pinyon Script",cursive;font-size:30px;color:var(--rose-d);margin:6px 0 2px;text-align:right}
+.q{font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;font-size:22px;text-align:center;margin:18px 0 14px}
+.btns{display:flex;gap:10px;justify-content:center;align-items:center;min-height:50px}
+.btn{
+  font:inherit;font-weight:600;font-size:15px;cursor:pointer;text-decoration:none;
+  padding:12px 22px;border-radius:999px;border:1.5px solid var(--line);
+  background:transparent;color:var(--ink);transition:transform .15s,opacity .35s;
+}
+.btn.yes{background:var(--rose);border-color:var(--rose);color:#fff}
+.btn.yes:hover{transform:scale(1.06)}
+.btn.maybe.gone{opacity:0;transform:scale(.6);pointer-events:none;width:0;padding:0;border-width:0;margin:0 -5px;overflow:hidden}
+.btn.no.run{position:fixed;transition:left .25s ease,top .25s ease;z-index:9}
+.note{min-height:20px;text-align:center;font-size:13px;color:var(--soft);margin-top:10px}
+.credit{text-align:center;font-size:12px;color:var(--soft);margin-top:16px;letter-spacing:.05em}
+
+/* done */
+#done{display:none;text-align:center}
+#done h2{font-size:40px;margin-bottom:6px}
+#done a{color:var(--rose-d);font-weight:600;font-size:14px;text-underline-offset:3px}
+</style>
+</head>
+<body>
+
+<section class="screen" id="gate">
+  <svg class="bouquet" viewBox="0 0 200 230" aria-hidden="true">
+    <ellipse cx="100" cy="214" rx="62" ry="7" fill="#e9c9c2" opacity=".6"/>
+    <path d="M92 214 C94 190 96 170 95 140 L105 140 C104 170 106 190 108 214 Z" fill="#9a735c"/>
+    <path d="M100 160 C88 150 80 144 72 132" stroke="#9a735c" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M100 150 C112 140 120 134 128 122" stroke="#9a735c" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <g fill="#9db78f">
+      <circle cx="100" cy="66" r="40"/><circle cx="64" cy="98" r="34"/><circle cx="136" cy="98" r="34"/>
+      <circle cx="82" cy="122" r="28"/><circle cx="120" cy="122" r="28"/>
+    </g>
+    <g fill="#b3cba5"><circle cx="92" cy="56" r="22"/><circle cx="62" cy="88" r="16"/><circle cx="128" cy="84" r="16"/></g>
+    <g fill="#e9a1ae">
+      <circle cx="86" cy="50" r="5"/><circle cx="112" cy="70" r="5"/><circle cx="64" cy="100" r="5"/>
+      <circle cx="140" cy="102" r="5"/><circle cx="96" cy="108" r="5"/><circle cx="122" cy="128" r="5"/>
+      <circle cx="76" cy="126" r="5"/><circle cx="104" cy="36" r="4"/><circle cx="48" cy="84" r="4"/>
+    </g>
+  </svg>
+  <div class="tap">tap the tree</div>
+</section>
+
+<section class="screen" id="letter">
+  <div class="paper" id="paper">
+    <div class="stamp">S</div>
+
+    <div id="ask">
+      <h2>Hey Salmah,</h2>
+      <p>It felt weird just asking you on Instagram, so I’m going to be a bit more formal and ask you properly.</p>
+      <p>Would you please come with me on a hike this Saturday at 9?</p>
+      <p>I’ll bring the snacks, and you’re free to bring whoever you like.</p>
+      <div class="where"><b>Newlands to Kirstenbosch</b><br>This <b>Saturday</b> at <b>9:00</b></div>
+      <div class="sign">Abdullah</div>
+
+      <div class="q">So, will you come?</div>
+      <div class="btns">
+        <a class="btn yes" id="yes" target="_blank" rel="noopener" href="#">Yes 🌸</a>
+        <button class="btn maybe" id="maybe" type="button">Maybe</button>
+        <button class="btn no" id="no" type="button">No</button>
+      </div>
+      <div class="note" id="note"></div>
+      <div class="credit">made with care by Abdullah</div>
+    </div>
+
+    <div id="done">
+      <h2>Yay 🌸</h2>
+      <p>It’s a plan. Saturday, Newlands to Kirstenbosch, 9:00. The snacks are on me.</p>
+      <p style="font-size:16px;color:var(--soft)">If the message didn’t open, tap below so I know you’re coming.</p>
+      <a id="again" target="_blank" rel="noopener" href="#">Send me a message</a>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  /* falling petals */
+  for(var i=0;i<14;i++){
+    var p=document.createElement("div");
+    p.className="petal";
+    p.style.left=(Math.random()*100)+"vw";
+    p.style.setProperty("--dx",(Math.random()*120-60)+"px");
+    p.style.animationDuration=(9+Math.random()*9)+"s";
+    p.style.animationDelay=(-Math.random()*14)+"s";
+    p.style.opacity=(.25+Math.random()*.35);
+    document.body.appendChild(p);
+  }
+
+  /* gate */
+  var gate=document.getElementById("gate"), letter=document.getElementById("letter");
+  var opened=false;
+  gate.addEventListener("click",function(){
+    if(opened) return; opened=true;
+    gate.classList.add("open");
+    setTimeout(function(){gate.classList.add("hide");letter.classList.add("show")},600);
+  });
+
+  /* yes */
+  var PHONE="27780120351";
+  var TEXT="Hi Abdullah! It’s Salmah. Yes, I’m coming on the hike on Saturday 🌸 See you at 9!";
+  var link="https://wa.me/"+PHONE+"?text="+encodeURIComponent(TEXT);
+  var yes=document.getElementById("yes"), again=document.getElementById("again");
+  var maybe=document.getElementById("maybe"), no=document.getElementById("no"), note=document.getElementById("note");
+  yes.href=link; again.href=link;
+  yes.addEventListener("click",function(){
+    document.getElementById("ask").style.display="none";
+    document.getElementById("done").style.display="block";
+  });
+
+  /* maybe disappears */
+  var gone=false;
+  function vanish(e){
+    if(gone) return;
+    if(e&&e.cancelable) e.preventDefault();
+    gone=true; maybe.classList.add("gone");
+    note.textContent="Maybe isn’t really an option 🙂";
+  }
+  maybe.addEventListener("pointerenter",vanish);
+  maybe.addEventListener("touchstart",vanish,{passive:false});
+  maybe.addEventListener("click",vanish);
+
+  /* no runs away */
+  var msgs=["Nope, can’t catch me","Too slow!","Try Yes instead 🌸","Almost had me!","Still no 😏"], n=0;
+  function dodge(e){
+    if(e&&e.cancelable) e.preventDefault();
+    var w=no.offsetWidth||80,h=no.offsetHeight||46,pad=12;
+    var maxX=Math.max(pad,innerWidth-w-pad),maxY=Math.max(pad,innerHeight-h-pad);
+    var yr=yes.getBoundingClientRect(),x,y,t=0;
+    do{
+      x=pad+Math.random()*(maxX-pad); y=pad+Math.random()*(maxY-pad); t++;
+    }while(t<25&&x<yr.right+10&&x+w>yr.left-10&&y<yr.bottom+10&&y+h>yr.top-10);
+    no.classList.add("run"); no.style.left=x+"px"; no.style.top=y+"px";
+    note.textContent=msgs[n++%msgs.length];
+  }
+  no.addEventListener("pointerenter",dodge);
+  no.addEventListener("touchstart",dodge,{passive:false});
+  no.addEventListener("click",dodge);
+})();
+</script>
+</body>
+</html>
